@@ -63,6 +63,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C46A20E22C5738FE00421802 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C46A20E62C57394A00421802 /* CustomCell */,
+				C46A20E52C57393700421802 /* ViewModel */,
+				C46A20E42C57392500421802 /* View */,
+				C46A20E32C57390D00421802 /* Model */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		C46A20E32C57390D00421802 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3E0992C55157B00D27D3F /* MovieSearch.swift */,
+				C4F3E0A02C56101F00D27D3F /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C46A20E42C57392500421802 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3E0942C54D07400D27D3F /* HomeSearchVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C46A20E52C57393700421802 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3E0972C54D71F00D27D3F /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C46A20E62C57394A00421802 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3E08F2C54CA3A00D27D3F /* MovieCollectionViewCell.swift */,
+				C4F3E0902C54CA3A00D27D3F /* MovieCollectionViewCell.xib */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		C46A20E82C57396D00421802 /* DetailsPage */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3E08E2C54CA1000D27D3F /* CustomCells */,
+				C4F3E0962C54D5FB00D27D3F /* ViewModel */,
+				C4F3E0932C54D03C00D27D3F /* View */,
+				C4F3E0872C53F8BC00D27D3F /* Model */,
+			);
+			path = DetailsPage;
+			sourceTree = "<group>";
+		};
+		C46A20E92C5739B700421802 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C4F3E08A2C53FB8600D27D3F /* APIManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		C4F3E0672C534FB900D27D3F = {
 			isa = PBXGroup;
 			children = (
@@ -82,13 +146,11 @@
 		C4F3E0722C534FB900D27D3F /* MovieDirectory */ = {
 			isa = PBXGroup;
 			children = (
+				C46A20E22C5738FE00421802 /* HomePage */,
+				C46A20E82C57396D00421802 /* DetailsPage */,
+				C46A20E92C5739B700421802 /* Network */,
 				C4F3E09B2C552ED000D27D3F /* Helper Classes */,
-				C4F3E0962C54D5FB00D27D3F /* ViewModel */,
-				C4F3E0932C54D03C00D27D3F /* View */,
-				C4F3E08E2C54CA1000D27D3F /* CustomCells */,
-				C4F3E08A2C53FB8600D27D3F /* APIManager.swift */,
 				C4F3E08C2C53FDA700D27D3F /* Constants.swift */,
-				C4F3E0872C53F8BC00D27D3F /* Model */,
 				C4F3E0732C534FB900D27D3F /* AppDelegate.swift */,
 				C4F3E0752C534FB900D27D3F /* SceneDelegate.swift */,
 				C4F3E0792C534FB900D27D3F /* Main.storyboard */,
@@ -103,8 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				C4F3E0882C53F8D400D27D3F /* MovieDetails.swift */,
-				C4F3E0992C55157B00D27D3F /* MovieSearch.swift */,
-				C4F3E0A02C56101F00D27D3F /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -112,8 +172,6 @@
 		C4F3E08E2C54CA1000D27D3F /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				C4F3E08F2C54CA3A00D27D3F /* MovieCollectionViewCell.swift */,
-				C4F3E0902C54CA3A00D27D3F /* MovieCollectionViewCell.xib */,
 				C4F3E0A42C564DC100D27D3F /* MovieDetailTableCell.swift */,
 				C4F3E0A52C564DC100D27D3F /* MovieDetailTableCell.xib */,
 			);
@@ -123,7 +181,6 @@
 		C4F3E0932C54D03C00D27D3F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C4F3E0942C54D07400D27D3F /* HomeSearchVC.swift */,
 				C4F3E09E2C560BF300D27D3F /* MovieDetailVC.swift */,
 			);
 			path = View;
@@ -132,7 +189,6 @@
 		C4F3E0962C54D5FB00D27D3F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C4F3E0972C54D71F00D27D3F /* HomeViewModel.swift */,
 				C4F3E0A22C5613EA00D27D3F /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModel;
