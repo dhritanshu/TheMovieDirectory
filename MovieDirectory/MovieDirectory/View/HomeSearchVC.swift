@@ -12,9 +12,17 @@ class HomeSearchVC: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var searchBtn: UIButton!
     @IBOutlet weak var movieCollectionView: UICollectionView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorLbl: UILabel!
     
-    private let searchViewModel: HomeViewModel = HomeViewModel()
+    // below variable to be used to handle case if user clicks on search without changing text
     private var previousSearch: String = ""
+    private let searchViewModel: HomeViewModel = HomeViewModel()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,20 +32,27 @@ class HomeSearchVC: UIViewController {
     
     private func setupDefaults() {
         textField.delegate = self
-        self.navigationController?.navigationBar.isHidden = true
         handleCallBack()
         setupCollectionView()
     }
     
     private func handleCallBack() {
         searchViewModel.moviesFetched = {
+            // performing all UI related changes on main thread
             DispatchQueue.main.async {
+                self.movieCollectionView.isHidden = false
+                self.errorView.isHidden = true
                 self.movieCollectionView.reloadData()
             }
         }
         
-        searchViewModel.moviesNotFetched = { error in
-            // show error if movie does not exist or network fails 
+        searchViewModel.moviesNotFetched = { errorMessage in
+            // show error if movie does not exist or network fails
+            DispatchQueue.main.async {
+                self.movieCollectionView.isHidden = true
+                self.errorView.isHidden = false
+                self.errorLbl.text = errorMessage
+            }
         }
     }
     
@@ -50,12 +65,21 @@ class HomeSearchVC: UIViewController {
     
     @IBAction func searchClicked(_ sender: Any) {
         textField.resignFirstResponder()
+        
         if let searchFieldText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
             if previousSearch == searchFieldText {
                 return
             }
             
+            // if text field is empty, reset to initial stage
+            if searchFieldText.isEmpty {
+                searchViewModel.model = nil
+                movieCollectionView.reloadData()
+                return
+            }
+            
             previousSearch = searchFieldText
+            // resetting model so that new search can be performed
             searchViewModel.model = nil
             movieCollectionView.reloadData()
             searchViewModel.fetchData(keyWord: searchFieldText)
@@ -79,7 +103,7 @@ extension HomeSearchVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
 
         // when the last cell becomes visible, make another request to fetch more data
         if let count = searchViewModel.model?.search?.count, indexPath.row == count - 1 {
-            searchViewModel.fetchData(keyWord: textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+            searchViewModel.fetchData(keyWord: previousSearch)
         }
         return cell ?? UICollectionViewCell()
     }
@@ -110,7 +134,6 @@ extension HomeSearchVC: UICollectionViewDataSource, UICollectionViewDelegate, UI
 extension HomeSearchVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        searchBtn.sendActions(for: .touchUpInside)
         return true
     }
 }

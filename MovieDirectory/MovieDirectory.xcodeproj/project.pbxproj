@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		C4F3E0742C534FB900D27D3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3E0732C534FB900D27D3F /* AppDelegate.swift */; };
 		C4F3E0762C534FB900D27D3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3E0752C534FB900D27D3F /* SceneDelegate.swift */; };
-		C4F3E0782C534FB900D27D3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3E0772C534FB900D27D3F /* ViewController.swift */; };
 		C4F3E07B2C534FB900D27D3F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C4F3E07A2C534FB900D27D3F /* Base */; };
 		C4F3E07D2C534FBA00D27D3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4F3E07C2C534FBA00D27D3F /* Assets.xcassets */; };
 		C4F3E0802C534FBA00D27D3F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C4F3E07F2C534FBA00D27D3F /* Base */; };
@@ -33,7 +32,6 @@
 		C4F3E0702C534FB900D27D3F /* MovieDirectory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDirectory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4F3E0732C534FB900D27D3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4F3E0752C534FB900D27D3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C4F3E0772C534FB900D27D3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C4F3E07A2C534FB900D27D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4F3E07C2C534FBA00D27D3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4F3E07F2C534FBA00D27D3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 				C4F3E0872C53F8BC00D27D3F /* Model */,
 				C4F3E0732C534FB900D27D3F /* AppDelegate.swift */,
 				C4F3E0752C534FB900D27D3F /* SceneDelegate.swift */,
-				C4F3E0772C534FB900D27D3F /* ViewController.swift */,
 				C4F3E0792C534FB900D27D3F /* Main.storyboard */,
 				C4F3E07C2C534FBA00D27D3F /* Assets.xcassets */,
 				C4F3E07E2C534FBA00D27D3F /* LaunchScreen.storyboard */,
@@ -223,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4F3E09D2C552EFE00D27D3F /* UIImageViewHelper.swift in Sources */,
-				C4F3E0782C534FB900D27D3F /* ViewController.swift in Sources */,
 				C4F3E0982C54D71F00D27D3F /* HomeViewModel.swift in Sources */,
 				C4F3E0742C534FB900D27D3F /* AppDelegate.swift in Sources */,
 				C4F3E08B2C53FB8600D27D3F /* APIManager.swift in Sources */,
@@ -386,6 +382,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 645239W7UU;
@@ -415,6 +412,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 645239W7UU;

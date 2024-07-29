@@ -11,18 +11,20 @@ class HomeViewModel {
     
     var model: MovieSearch?
     
+    // closures to inform the view about fetched data
+    var moviesFetched: (() -> Void)?
+    var moviesNotFetched: ((String?) -> Void)?
+    
     private var page: Int = 0
     
-    var moviesFetched: (() -> Void)?
-    var moviesNotFetched: ((Error?) -> Void)?
-    
     func fetchData(keyWord: String) {
-
+        
         var urlString = Constants.moviesBaseUrl
         
         if let list = model?.search {
             let countString = String(list.count)
-            //if all the results for a keyword are fetched then no need to make extra api calls
+            // if all the results for a keyword are fetched then no need to make extra api calls
+            // tried and tested with keyword 'the hangover'
             if (self.model?.totalResultsString == countString) {
                 return
             }
@@ -38,9 +40,9 @@ class HomeViewModel {
         urlString = UrlStringCreator.buildUrlWith(urlStr: urlString, param: paramDictionary) ?? ""
         
         let completionHandler: ((MovieSearch?, Error?) -> Void) = { [weak self] response, error in
-            if let error = error {
-                self?.moviesNotFetched?(error)
-                self?.page = 1
+            if let _ = error {
+                self?.moviesNotFetched?(error?.localizedDescription ?? "Error fetching results. Please try later")
+                self?.page = 0
                 return
             }
             
@@ -48,8 +50,8 @@ class HomeViewModel {
                   var films = result.search,
                   films.count > 0
             else {
-                self?.moviesNotFetched?(error)
-                self?.page = 1
+                self?.moviesNotFetched?(response?.errorMessage)
+                self?.page = 0
                 return
             }
             

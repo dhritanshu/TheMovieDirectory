@@ -43,3 +43,28 @@ class APIManager: NSObject {
     }
     
 }
+
+struct UrlStringCreator {
+    static func buildUrlWith(urlStr: String, param: [String: Any]) -> String? {
+        var finalUrl = urlStr
+        var count = 0
+        if !urlStr.isEmpty && param.keys.count > 0 {
+            for key in param.keys {
+                if count == 0 {
+                    if let value = param[key] {
+                        finalUrl += "?\(key)=\(value)"
+                    }
+                } else {
+                    
+                    if let value = param[key] {
+                        finalUrl += "&\(key)=\(value)"
+                    }
+                }
+                
+                count = count + 1
+            }
+            return finalUrl
+        }
+        return nil
+    }
+}

@@ -37,16 +37,15 @@ class MovieCollectionViewCell: UICollectionViewCell {
     private func setImage() {
         guard let posterString = viewModel?.poster else { return }
         posterImg.downloadImage(posterString) { [weak self] image in
-            if let posterImage = image {
-                DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let posterImage = image {
                     self?.posterImg.image = posterImage
+                } else {
+                    // set placeholder img
+                    self?.posterImg.image = UIImage(systemName: "popcorn")
                 }
-            } else {
-                // set placeholder img
-                self?.posterImg.image = UIImage(systemName: "popcorn")
             }
         }
     }
-    
     
 }

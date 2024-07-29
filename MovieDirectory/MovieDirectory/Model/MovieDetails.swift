@@ -56,6 +56,10 @@ class MovieDetails: Codable {
     func createMovieDetails() -> [DetailItem] {
         detailsList = []
         
+        if let imdbRating = self.imdbRating {
+            detailsList.append(DetailItem(heading: "IMDb Rating", detail: imdbRating))
+        }
+        
         if let director = self.director {
             detailsList.append(DetailItem(heading: "Director", detail: director))
         }
@@ -82,10 +86,6 @@ class MovieDetails: Codable {
         
         if let awards = self.awards {
             detailsList.append(DetailItem(heading: "Awards", detail: awards))
-        }
-        
-        if let imdbRating = self.imdbRating {
-            detailsList.append(DetailItem(heading: "IMDb Rating", detail: imdbRating))
         }
         
         if let boxOffice = self.boxOffice {

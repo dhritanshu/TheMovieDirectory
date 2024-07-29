@@ -10,8 +10,10 @@ import Foundation
 class MovieDetailViewModel {
     
     var model: MovieDetails?
+    var detailsList: [DetailItem] = []
+    // closures to inform the view about fetched data
     var movieDetailsFetched: (() -> Void)?
-    var movieDetailsNotFetched: ((Error?) -> Void)?
+    var movieDetailsNotFetched: ((String?) -> Void)?
     
     func fetchDetailsById(id: String) {
         var urlString = Constants.moviesBaseUrl
@@ -25,18 +27,22 @@ class MovieDetailViewModel {
         
         let completionHandler: ((MovieDetails?, Error?) -> Void) = { [weak self] response, error in
             
-            if let error = error {
-                self?.movieDetailsNotFetched?(error)
+            if let _ = error {
+                self?.movieDetailsNotFetched?("Error fetching details. Please try later")
                 return
             }
             
             guard let result = response
             else {
-                self?.movieDetailsNotFetched?(error)
+                self?.movieDetailsNotFetched?("Error fetching details. Please try later")
                 return
             }
             
             self?.model = result
+            
+            if let list = self?.model?.createMovieDetails() {
+                self?.detailsList = list
+            }
 
             self?.movieDetailsFetched?()
         }

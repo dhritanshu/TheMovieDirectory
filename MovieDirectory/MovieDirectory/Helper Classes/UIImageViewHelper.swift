@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIImageView {
+    
+    // method to download images from a url and return a UIImage to be used
     func downloadImage(_ urlString: String, completion: ((_ image: UIImage?) -> ())?) {
         
         guard let url = URL(string: urlString) else {

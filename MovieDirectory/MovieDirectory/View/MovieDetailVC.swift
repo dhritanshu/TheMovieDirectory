@@ -9,13 +9,20 @@ import UIKit
 
 class MovieDetailVC: UIViewController {
 
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var posterImgView: UIImageView!
     @IBOutlet weak var movieTitleLbl: UILabel!
     @IBOutlet weak var releaseYearLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var errorView: UIView!
+    @IBOutlet weak var errorLbl: UILabel!
     
     var viewModel: MovieDetailViewModel?
-    var detailsList: [DetailItem] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +48,22 @@ class MovieDetailVC: UIViewController {
     private func handleCallBack() {
         viewModel?.movieDetailsFetched = { [weak self] in
             DispatchQueue.main.async {
+                self?.headerView.isHidden = false
+                self?.tableView.isHidden = false
+                self?.errorView.isHidden = true
                 self?.updateView()
-                if let list = self?.viewModel?.model?.createMovieDetails() {
-                    self?.detailsList = list
-                }
                 self?.tableView.reloadData()
             }
         }
         
-        viewModel?.movieDetailsNotFetched = { error in
+        viewModel?.movieDetailsNotFetched = { [weak self] errorMessage in
             //hide table and show error
+            DispatchQueue.main.async {
+                self?.headerView.isHidden = true
+                self?.tableView.isHidden = true
+                self?.errorView.isHidden = false
+                self?.errorLbl.text = errorMessage
+            }
         }
     }
     
@@ -64,13 +77,13 @@ class MovieDetailVC: UIViewController {
     private func setImage() {
         guard let posterString = viewModel?.model?.poster else { return }
         posterImgView.downloadImage(posterString) { [weak self] image in
-            if let posterImage = image {
-                DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let posterImage = image {
                     self?.posterImgView.image = posterImage
+                } else {
+                    // set placeholder img
+                    self?.posterImgView.image = UIImage(systemName: "popcorn")
                 }
-            } else {
-                // set placeholder img
-                self?.posterImgView.image = UIImage(systemName: "popcorn")
             }
         }
     }
@@ -80,12 +93,12 @@ class MovieDetailVC: UIViewController {
 extension MovieDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        detailsList.count
+        viewModel?.detailsList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieDetailTableCell", for: indexPath) as? MovieDetailTableCell
-        cell?.model = detailsList[indexPath.row]
+        cell?.model = viewModel?.detailsList[indexPath.row]
         return cell ?? UITableViewCell()
     }
     
